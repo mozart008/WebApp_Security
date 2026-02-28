@@ -1,0 +1,16 @@
+#User-specific files (Visual Studio)
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+#Build results
+[Bb]in/
+[Oo]bj/
+
+#Entity ramework & SQL Server
+*.mdf
+*.ldf
+
+#Published output
+publish/
