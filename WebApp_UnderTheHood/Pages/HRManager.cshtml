@@ -6,3 +6,31 @@
     <h1 class="display-4">Welcome to HR manager</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (Model.weatherForecastItems is not null)
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temperature °C </th>
+                <th>Temperature °F</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.weatherForecastItems)
+            {
+                <tr>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.TemperatureC °C</td>
+                    <td>@item.TemperatureF °F</td>
+                    <td>@item.Summary</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
