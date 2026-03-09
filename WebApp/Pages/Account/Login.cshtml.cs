@@ -32,6 +32,10 @@ namespace WebApp.Pages.Account
             if (result.Succeeded)
                 return RedirectToPage("/Index");
 
+            if (result.RequiresTwoFactor)
+                return RedirectToPage("/Account/LoginTwoFactor",
+                    new { email = this.Credential.Email, rememberMe = this.Credential.RememberMe });
+
             if (result.IsLockedOut)
                 ModelState.AddModelError("Login", "You are locked out.");
             else

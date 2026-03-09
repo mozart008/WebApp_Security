@@ -16,6 +16,8 @@ namespace WebApp.Services
 
         public async Task SendAsync(string from, string to, string subject, string body)
         {
+            //disable for now
+            return;
             var message = new MailMessage(
                 from,
                 to,
