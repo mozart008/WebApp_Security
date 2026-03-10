@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddControllers();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -39,6 +41,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddSingleton<IEmailService, EmailService>();
 
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = builder.Configuration["FacebookAppId"] ?? string.Empty;
+    options.AppSecret = builder.Configuration["FacebookAppSecret"] ?? string.Empty;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,5 +67,7 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapControllers();
 
 app.Run();
